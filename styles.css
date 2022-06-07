@@ -15,8 +15,7 @@ body {
   align-items: center;
 }
 #flags {
-  color: #fff;
-  margin-top: 20px;
+  background: #fff;
 }
 #grid {
   box-shadow: #000 10px 20px 40px 0px;
@@ -24,6 +23,19 @@ body {
 #grid > div {
   display: grid;
   place-items: center;
+}
+#restart {
+  padding: 10px 20px;
+	cursor:pointer;
+}
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+  background: #fff;
+  padding: 10px;
 }
 .cell {
   background: #fff;

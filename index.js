@@ -1,5 +1,6 @@
 const root = document.querySelector("#root");
 const flags = document.querySelector("#flags");
+const restart = document.querySelector("#restart");
 let isGameOver = false;
 const numRows = 15;
 const numColums = 15;
@@ -23,12 +24,14 @@ const operations = [
 const gameOver = () => {
   for (let i = 0; i < numRows; i++) {
     for (let j = 0; j < numColums; j++) {
+      const bomb = document.getElementById(`${i}-${j}`);
       if (GRID[i][j]) {
-        const bomb = document.getElementById(`${i}-${j}`);
         bomb.innerText = "💣";
       }
+      bomb.classList.add("checked");
     }
   }
+  flags.innerText = `Flags left: 💀`;
 };
 
 const checkForWin = () => {
@@ -112,7 +115,7 @@ const addFlag = (cell) => {
   }
 };
 
-const createGrid = () => {
+const createGrid = (GRID) => {
   const grid = document.createElement("div");
   grid.style.display = "grid";
   grid.style.gridTemplateColumns = `repeat(${numColums},${cellWidth}px)`;
@@ -175,5 +178,15 @@ const createGrid = () => {
 };
 
 window.onload = () => {
-  createGrid();
+  createGrid(GRID);
+  restart.onclick = (e) => {
+    e.preventDefault();
+    root.innerHTML = "";
+    GRID = [];
+    numFlags = numBombs;
+    isGameOver = false;
+    createdBombs = 0;
+    flags.innerHTML = `Flags left: ${numFlags}`;
+    createGrid(GRID);
+  };
 };
